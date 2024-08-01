@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ exam.title }}</title>
+</head>
+<body>
+    <h1>{{ exam.title }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% for question in exam.question_set.all %}
+        <h2>{{ question.text }}</h2>
+        {% for choice in question.choice_set.all %}
+        <input type="radio" name="question_{{ question.id }}" value="{{ choice.id }}">{{ choice.text }}<br>
+        {% endfor %}
+        {% endfor %}
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
